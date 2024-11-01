@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/pages/register_page.dart';
 import 'login_page.dart';
 import 'widgets/welcome_app_bar.dart';
 
@@ -64,7 +65,10 @@ class WelcomePage extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                // Handle register button press
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const RegisterPage()),
+                );
               },
               child: const Text('REGISTER', style: TextStyle(color: Colors.white)),
             ),
