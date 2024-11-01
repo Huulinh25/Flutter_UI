@@ -25,9 +25,10 @@ class LoginPage extends StatelessWidget {
 
                 // Email input
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 20, 10, 15),
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 15),
                   child: TextField(
                     decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                       hintText: 'Email',
                       hintStyle: TextStyle(
                         color: Colors.teal[700],
@@ -53,9 +54,10 @@ class LoginPage extends StatelessWidget {
                 ),
                 // Password input
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+                  padding: const EdgeInsets.fromLTRB(20, 5, 20, 10),
                   child: TextField(
                     decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                       hintText: 'Password',
                       hintStyle: TextStyle(
                         color: Colors.teal[700],
@@ -81,7 +83,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 // Forget password
                 Padding(
-                  padding: const EdgeInsets.only(right: 15),
+                  padding: const EdgeInsets.only(right: 20),
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Text(
