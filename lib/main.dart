@@ -13,15 +13,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // Thiết lập appBarTheme để đặt màu chữ
         appBarTheme: const AppBarTheme(
           // ICON
           iconTheme: IconThemeData(
-            color: Colors.black, // Đặt màu cho tất cả icon trong AppBar
+            color: Colors.black,
           ),
           // TITLE TEXT
           titleTextStyle: TextStyle(
-            color: Colors.black, // Màu chữ cho AppBar title
+            color: Colors.black,
             fontSize: 30,
             fontWeight: FontWeight.bold,
           ),
