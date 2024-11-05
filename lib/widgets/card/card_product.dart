@@ -16,45 +16,55 @@ class CardProduct extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.vertical(
-            top: Radius.circular(10)), // Bo góc cho Container
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
       ),
-      // width: 170,
       child: Column(
-        mainAxisSize: MainAxisSize.min, // Chỉ sử dụng không gian cần thiết
-        crossAxisAlignment: CrossAxisAlignment.start, // Căn trái
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           ClipRRect(
-            borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(12)
-            ), // Bo góc trên cho ảnh
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
             child: Image.asset(
               imgLink ?? 'assets/images/products/SOIL_MIX.png',
               height: 150,
-              width: double.infinity, // Chiếm hết chiều ngang
-              fit: BoxFit.cover, // Đảm bảo ảnh phủ hết không gian
+              width: double.infinity,
+              fit: BoxFit.cover,
             ),
           ),
           const SizedBox(height: 8),
           Padding(
-            padding:
-                const EdgeInsets.only(left: 16), // Khoảng cách từ lề trái
-            child: Text(
-              maxLines: 1, // Limits to 1 lines
-              overflow: TextOverflow.ellipsis,
-              nameProduct,
-              style: Theme.of(context).textTheme.labelSmall,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Padding(
-            padding:
-                const EdgeInsets.only(left: 16, bottom: 10),
-            child: Text(
-              "$price VNĐ",
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.black,
-                  ),
+            padding: const EdgeInsets.only(left: 16),
+            child: Column(
+              children: [
+                Text(
+                  nameProduct,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis, // quá kích thước sẽ hiển thị ...
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "$price VNĐ",
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: Colors.black,
+                          ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5),
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.shopping_cart_checkout,
+                        ),
+                        onPressed: () {},
+                        color: Colors.grey[500],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ],
