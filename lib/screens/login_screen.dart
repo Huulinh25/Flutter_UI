@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/widgets/base_input.dart';
-import '../widgets/welcome_app_bar.dart';
-import '../widgets/primary_button.dart';
+import 'package:my_app/widgets/input/base_input.dart';
+import '../widgets/app_bar/welcome_app_bar.dart';
+import '../widgets/button/primary_button.dart';
+
+import 'home_screen.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -47,7 +49,11 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 20),
               PrimaryButton(
                 nameButton: 'LOGIN',
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, 
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  );
+                },
               ),
 
               // Don't have an account? Sign up

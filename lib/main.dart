@@ -13,26 +13,39 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(
-            surface: const Color.fromARGB(250, 253, 250, 250),
-            primary: Colors.teal[700],
-            seedColor: Colors.purple,
-            brightness: Brightness.dark,
+        // Thiết lập appBarTheme để đặt màu chữ
+        appBarTheme: const AppBarTheme(
+          // ICON
+          iconTheme: IconThemeData(
+            color: Colors.black, // Đặt màu cho tất cả icon trong AppBar
           ),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              minimumSize: const Size(300, 50),
-              backgroundColor: Colors.teal[700],
-              foregroundColor: Colors.white,
-              textStyle:
-                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
+          // TITLE TEXT
+          titleTextStyle: TextStyle(
+            color: Colors.black, // Màu chữ cho AppBar title
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          surface: const Color.fromARGB(250, 253, 250, 250),
+          primary: Colors.teal[700],
+          seedColor: Colors.purple,
+          brightness: Brightness.dark,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            minimumSize: const Size(300, 50),
+            backgroundColor: Colors.teal[700],
+            foregroundColor: Colors.white,
+            textStyle:
+                const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50),
             ),
           ),
-          textTheme: TextTheme(
+        ),
+        textTheme: TextTheme(
             labelLarge: TextStyle(
               fontSize: 50,
               color: Colors.teal[700],
@@ -48,7 +61,7 @@ class MyApp extends StatelessWidget {
               color: Colors.teal[700],
               fontWeight: FontWeight.bold,
             )),
-          ),
+      ),
       home: const WelcomePage(),
     );
   }

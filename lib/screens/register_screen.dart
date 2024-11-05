@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/widgets/base_input.dart';
-import 'package:my_app/widgets/primary_button.dart';
-import '../widgets/welcome_app_bar.dart';
+import 'package:my_app/widgets/input/base_input.dart';
+import 'package:my_app/widgets/button/primary_button.dart';
+import '../widgets/app_bar/welcome_app_bar.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});

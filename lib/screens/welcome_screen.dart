@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/screens/register_screen.dart';
-import 'package:my_app/widgets/primary_button.dart';
+import 'package:my_app/widgets/button/primary_button.dart';
 import 'login_screen.dart';
-import '../widgets/welcome_app_bar.dart';
+import '../widgets/app_bar/welcome_app_bar.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
