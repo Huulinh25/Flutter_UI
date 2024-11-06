@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:my_app/screens/checkout/checkout_success_screen.dart';
 import 'package:my_app/widgets/app_bar/header_app_bar.dart';
 import 'package:my_app/widgets/button/confirm_button.dart';
 import 'package:my_app/widgets/items/product_item.dart';
@@ -128,7 +129,15 @@ class CheckoutScreen extends StatelessWidget {
 
               Column(
                 children: [
-                  ConfirmButton(nameButton:'Pay Now', onPressed: () {},)
+                  ConfirmButton(
+                    nameButton:'Pay Now',
+                    onPressed: () {
+                      Navigator.push(
+                        context, 
+                        MaterialPageRoute(builder: (context) => const CheckouSuccesstScreen()),
+                        );
+                    },
+                    )
                 ],
               )
             ],

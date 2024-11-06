@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/screens/checkout_screen.dart';
+import 'package:my_app/screens/checkout/checkout_screen.dart';
 import 'package:my_app/widgets/button/confirm_button.dart';
 import 'package:my_app/widgets/items/quantity_selector_item.dart';
 
