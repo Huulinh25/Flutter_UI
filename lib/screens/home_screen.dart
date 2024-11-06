@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/widgets/button/category_item_button.dart';
+import 'package:my_app/widgets/items/category_item.dart';
 import '../widgets/app_bar/header_app_bar.dart';
 import '../widgets/card/card_product.dart';
 import 'package:my_app/widgets/input/search_input.dart';
@@ -87,39 +87,31 @@ class HomeScreen extends StatelessWidget {
                                       .textTheme
                                       .labelMedium
                                       ?.copyWith(
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold,
                                       ),
                                 ),
 
                                 // Filter Buttons
-                                const SizedBox(height: 10),
+                                const SizedBox(height: 20),
                                 CategoryItem(
                                   text: 'Custom Button',
-                                  backgroundColor: Colors.white,
-                                  foregroundColor: Colors.grey[500],
-                                  borderColor: Colors.grey[500],
                                   onPressed: () {},
                                 ),
 
                                 const SizedBox(height: 10),
                                 CategoryItem(
                                   text: 'Custom Button',
-                                  backgroundColor: Colors.white,
-                                  foregroundColor: Colors.grey[500],
-                                  borderColor: Colors.grey[500],
                                   onPressed: () {},
                                 ),
 
                                 const SizedBox(height: 10),
                                 CategoryItem(
                                   text: 'Custom Button',
-                                  backgroundColor: Colors.white,
-                                  foregroundColor: Colors.grey[500],
-                                  borderColor: Colors.grey[500],
                                   onPressed: () {},
                                 ),
 
-                                const SizedBox(height: 40),
+                                const SizedBox(height: 30),
 
                                 // Apply Button
                                 Align(
@@ -168,7 +160,6 @@ class HomeScreen extends StatelessWidget {
                 },
               ),
             ),
-            
           ],
         ),
       ),

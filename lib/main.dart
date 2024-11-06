@@ -59,7 +59,17 @@ class MyApp extends StatelessWidget {
               fontSize: 17,
               color: Colors.teal[700],
               fontWeight: FontWeight.bold,
-            )),
+            ),
+            bodyMedium: const TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+              fontWeight: FontWeight.bold
+            ),
+            bodySmall: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold
+            )
+          ),
       ),
       home: const WelcomePage(),
     );

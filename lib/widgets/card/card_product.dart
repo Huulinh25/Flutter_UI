@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/screens/checkout_screen.dart';
+import 'package:my_app/widgets/button/confirm_button.dart';
+import 'package:my_app/widgets/items/quantity_selector_item.dart';
 
 class CardProduct extends StatelessWidget {
   const CardProduct({
     super.key,
     this.imgLink,
     required this.nameProduct,
-    this.price = "200.000",
+    this.price,
   });
 
   final String? imgLink;
@@ -14,6 +17,7 @@ class CardProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> sizes = ['S', 'M', 'L', 'XL', 'XXXL'];
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -64,6 +68,7 @@ class CardProduct extends StatelessWidget {
                           ),
                     ),
                     IconButton(
+                      color: Colors.grey[500],
                       icon: const Icon(Icons.shopping_cart_checkout),
                       onPressed: () {
                         showModalBottomSheet(
@@ -114,74 +119,42 @@ class CardProduct extends StatelessWidget {
                                             ],
                                           ),
                                         ),
-                                        // Quantity controls
-                                        Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Container(
-                                              alignment: Alignment.center,
-                                              decoration: BoxDecoration(
-                                                color: Colors.grey[200],
-                                                borderRadius: BorderRadius.circular(
-                                                    8), // Adjust the radius to your preference
-                                              ),
-                                              child: Row(
-                                                children: [
-                                                  CircleAvatar(
-                                                    radius:
-                                                        13, // Reduced radius
-                                                    backgroundColor:
-                                                        Colors.grey,
-                                                    child: IconButton(
-                                                      icon: const Icon(
-                                                          Icons.remove,
-                                                          size: 15),
-                                                      onPressed: () {},
-                                                      padding: EdgeInsets
-                                                          .zero, // Remove padding to keep the button compact
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                                                    child: Text(
-                                                      "2", // Quantity display
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          color:
-                                                              Colors.grey[500]),
-                                                    ),
-                                                  ),
-                                                  CircleAvatar(
-                                                    radius:
-                                                        13, // Reduced radius
-                                                    backgroundColor:
-                                                        Colors.grey,
-                                                    child: SizedBox(
-                                                      width: 15,
-                                                      height: 15,
-                                                      child: IconButton(
-                                                        icon: const Icon(
-                                                            Icons.add,
-                                                            size: 15),
-                                                        onPressed: () {},
-                                                        padding:
-                                                            EdgeInsets.zero,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
+                                        
+
+                                        QuantitySelectorItem(
+                                          quantity: 2,
+                                          onIncrease: () {},
+                                          onDecrease: () {},
                                         ),
                                       ],
                                     ),
-                                    
+
+                                    const SizedBox(height: 10),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: sizes.map((size) {
+                                        return Container(
+                                          padding: const EdgeInsets.symmetric(horizontal:8),
+                                          height: 28,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            border: Border.all(color: Colors.grey, width: 1),
+                                          ),
+                                          margin: const EdgeInsets.only(right: 8),
+                                          child: Center(
+                                            child: Text(
+                                              size,
+                                              style: const TextStyle(
+                                                  color: Colors.grey),
+                                            ),
+                                          ),
+                                        );
+                                      }).toList(),
+                                    ),
                                     const SizedBox(height: 10),
                                     Wrap(
                                       spacing: 8,
                                       children: [
-                                        Colors.blue,
                                         Colors.cyan,
                                         Colors.green,
                                         Colors.pink,
@@ -196,6 +169,8 @@ class CardProduct extends StatelessWidget {
                                           .toList(),
                                     ),
                                     const SizedBox(height: 16),
+                                    Text("Add note", style: Theme.of(context).textTheme.labelSmall),
+                                    const SizedBox(height: 8),
                                     TextField(
                                       minLines: 3,
                                       maxLines: 4,
@@ -211,11 +186,15 @@ class CardProduct extends StatelessWidget {
                                     const SizedBox(height: 16),
                                     SizedBox(
                                       width: double.infinity,
-                                      child: ElevatedButton(
+                                      child: ConfirmButton(
+                                        nameButton:'Add to cart',
                                         onPressed: () {
-                                          // Add to cart logic
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => const CheckoutScreen()),
+                                          );
                                         },
-                                        child: const Text("Add To Cart"),
                                       ),
                                     ),
                                   ],
@@ -225,7 +204,6 @@ class CardProduct extends StatelessWidget {
                           },
                         );
                       },
-                      color: Colors.grey[500],
                     ),
                   ],
                 ),

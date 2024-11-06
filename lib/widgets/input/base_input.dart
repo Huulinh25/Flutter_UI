@@ -25,14 +25,14 @@ class BaseInput extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: const BorderRadius.all(Radius.circular(30)),
           borderSide: BorderSide(
-            color: Colors.teal[700]!, // Màu viền mặc định
+            color: Colors.teal[700]!,
             width: 2,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: const BorderRadius.all(Radius.circular(30)),
           borderSide: BorderSide(
-            color: Colors.teal[700]!, // Màu viền mặc định
+            color: Colors.teal[700]!,
             width: 2,
           ),
         ),

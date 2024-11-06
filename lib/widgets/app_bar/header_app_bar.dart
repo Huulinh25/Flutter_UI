@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class HeaderAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const HeaderAppBar({super.key});
+  const HeaderAppBar({this.title,super.key});
+  final String ?title;
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -12,10 +13,9 @@ class HeaderAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: IconButton(
         icon: const Icon(Icons.menu),
         onPressed: () {
-          // Xử lý sự kiện khi nhấn vào icon
         },
       ),
-      title: Text("POS", style: Theme.of(context).appBarTheme.titleTextStyle),
+      title: Text(title ?? 'POS', style: Theme.of(context).appBarTheme.titleTextStyle),
       centerTitle: true,
       automaticallyImplyLeading: false,
     );
