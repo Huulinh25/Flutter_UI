@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/widgets/items/category_item.dart';
+import 'package:my_app/widgets/modals/filter_category_modal.dart';
 import '../widgets/app_bar/header_app_bar.dart';
 import '../widgets/card/card_product.dart';
 import 'package:my_app/widgets/input/search_input.dart';
@@ -73,63 +73,7 @@ class HomeScreen extends StatelessWidget {
                         context: context,
                         isScrollControlled: true,
                         builder: (BuildContext context) {
-                          return Container(
-                            padding: const EdgeInsets.all(16),
-                            height: 350,
-                            color: Colors.white,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Label
-                                Text(
-                                  'By Category',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .labelMedium
-                                      ?.copyWith(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                ),
-
-                                // Filter Buttons
-                                const SizedBox(height: 20),
-                                CategoryItem(
-                                  text: 'Custom Button',
-                                  onPressed: () {},
-                                ),
-
-                                const SizedBox(height: 10),
-                                CategoryItem(
-                                  text: 'Custom Button',
-                                  onPressed: () {},
-                                ),
-
-                                const SizedBox(height: 10),
-                                CategoryItem(
-                                  text: 'Custom Button',
-                                  onPressed: () {},
-                                ),
-
-                                const SizedBox(height: 30),
-
-                                // Apply Button
-                                Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      minimumSize:
-                                          const Size(double.infinity, 50),
-                                    ),
-                                    onPressed: () {
-                                      Navigator.pop(context); // Close the modal
-                                    },
-                                    child: const Text('Apply'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
+                          return const CheckoutBottomModal();
                         },
                       );
                     },
@@ -143,10 +87,10 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // Number of columns
-                  crossAxisSpacing: 10, // Horizontal spacing between cards
-                  mainAxisSpacing: 10, // Vertical spacing between cards
-                  childAspectRatio: 0.74, // Adjust aspect ratio for the card
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  childAspectRatio: 0.74,
                 ),
                 itemCount: products.length,
                 shrinkWrap: true,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/screens/home_screen.dart';
 import 'package:my_app/widgets/app_bar/header_app_bar.dart';
 import 'package:my_app/widgets/button/confirm_button.dart';
 
@@ -43,8 +44,12 @@ class CheckouSuccesstScreen extends StatelessWidget {
             ConfirmButton(
               nameButton: 'Back',
               onPressed: () {
-                // Implement back button functionality here
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomeScreen(),
+                  ),
+                );
               },
             ),
             
