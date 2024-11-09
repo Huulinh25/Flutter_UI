@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:my_app/model/product_model.dart';
 import 'package:my_app/network/network_request.dart';
 import 'package:my_app/widgets/app_bar/header_app_bar.dart';
-import 'package:my_app/widgets/items/product_grid_item.dart';
+import 'package:my_app/widgets/home/product_grid.dart';
 import 'package:my_app/widgets/items/search_bar_filter_item.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final String? loginMessage;
+
+  const HomeScreen({super.key, this.loginMessage});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -38,8 +40,20 @@ class _HomeScreenState extends State<HomeScreen> {
             return SingleChildScrollView(
               child: Column(
                 children: [
+                  if (widget.loginMessage != null)
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        widget.loginMessage!,
+                        style: const TextStyle(
+                          color: Colors.green,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   const SearchBarFilterItem(),
-                  ProductGridItem(products: snapshot.data!),
+                  ProductGrid(products: snapshot.data!),
                 ],
               ),
             );
@@ -49,6 +63,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-
-

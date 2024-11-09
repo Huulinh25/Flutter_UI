@@ -3,10 +3,10 @@ import 'package:my_app/model/product_model.dart';
 import 'package:my_app/widgets/card/card_product.dart';
 
 
-class ProductGridItem extends StatelessWidget {
+class ProductGrid extends StatelessWidget {
   final List<ProductModel> products;
 
-  const ProductGridItem({super.key, required this.products});
+  const ProductGrid({super.key, required this.products});
 
   @override
   Widget build(BuildContext context) {
