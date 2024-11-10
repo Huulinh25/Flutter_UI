@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_app/bloc/product/product_bloc.dart';
-import 'package:my_app/bloc/product/product_event.dart';
-import 'package:my_app/bloc/product/product_state.dart';
 import 'package:my_app/widgets/app_bar/header_app_bar.dart';
 import 'package:my_app/widgets/home/product_grid.dart';
 import 'package:my_app/widgets/items/search_bar_filter_item.dart';
+
+import '../cubit/product_cubit.dart';
+import '../cubit/product_state.dart';
 
 class HomeScreen extends StatelessWidget {
   final String? loginMessage;
@@ -17,10 +17,10 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: const HeaderAppBar(),
       body: BlocProvider(
-        create: (BuildContext context) => ProductBloc()..add(FetchProductsEvent()),
-        child: BlocBuilder<ProductBloc, ProductState>(
+        create: (context) => ProductCubit()..fetchProducts(),
+        child: BlocBuilder<ProductCubit, ProductState>(
           builder: (context, state) {
-            print('aaaaaa $state');
+            // print('aaaaaa $state');
             if (state is ProductLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is ProductError) {

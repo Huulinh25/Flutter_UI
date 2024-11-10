@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
         builder: (context, snapshot) {
           final state = snapshot.data;
 
-          // Điều hướng đến HomeScreen nếu đăng nhập thành công
+          // Navigate to HomeScreen if login is successful
           if (state?.isSuccess ?? false) {
             Future.microtask(() => Navigator.pushReplacement(
                   context,
