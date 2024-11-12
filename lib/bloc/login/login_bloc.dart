@@ -1,23 +1,17 @@
-import 'dart:async';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_app/bloc/login/login_event.dart';
 import 'package:my_app/bloc/login/login_state.dart';
 
-class LoginBloc {
-  final _stateController = StreamController<LoginState>();
-  Stream<LoginState> get state => _stateController.stream;
+class LoginBloc extends Cubit<LoginState> {
+  LoginBloc() : super(LoginState.initial());
 
   void send(LoginEvent event) {
     switch (event) {
       case LoginEvent.login:
-        _stateController.sink.add(LoginState.loading());
+        emit(LoginState.loading());
         Future.delayed(const Duration(seconds: 2), () {
-          _stateController.sink.add(LoginState.success());
+          emit(LoginState.success());
         });
     }
-  }
-
-  void dispose() {
-    _stateController.close();
   }
 }
