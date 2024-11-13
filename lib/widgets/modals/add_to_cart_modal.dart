@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/screens/checkout/checkout_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_app/widgets/button/confirm_button.dart';
 import 'package:my_app/widgets/items/quantity_selector_item.dart';
 
+import '../../cubit/product/product_selection_cubit.dart';
+
+
 class AddToCartModal extends StatelessWidget {
+  final int productId;
   final String? imgLink;
   final String nameProduct;
   final List<String> sizes;
 
   const AddToCartModal({
     super.key,
+    required this.productId,
     required this.imgLink,
     required this.nameProduct,
     required this.sizes,
@@ -123,11 +128,9 @@ class AddToCartModal extends StatelessWidget {
               child: ConfirmButton(
                 nameButton: 'Add to cart',
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const CheckoutScreen()),
-                  );
+                  // print('eeeeeeeeeeeeeeee $productId');
+                  context.read<ProductSelectionCubit>().handleSelectionProduct(productId);
+                  Navigator.pop(context); //close bottom modal
                 },
               ),
             ),

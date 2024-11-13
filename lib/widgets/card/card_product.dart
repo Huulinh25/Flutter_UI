@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_app/widgets/modals/add_to_cart_modal.dart';
+
+import '../../cubit/product/product_selection_cubit.dart';
 
 class CardProduct extends StatelessWidget {
   const CardProduct({
     super.key,
+    required this.productId,
     this.imgLink,
     required this.nameProduct,
     this.price,
   });
 
+  final int productId;
   final String? imgLink;
   final String nameProduct;
   final String? price;
@@ -16,6 +21,9 @@ class CardProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> sizes = ['S', 'M', 'L', 'XL', 'XXXL'];
+    final selectedProducts = context.watch<ProductSelectionCubit>().state;
+    final isSelected = selectedProducts[productId] ?? 0;
+
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -25,23 +33,63 @@ class CardProduct extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-            child: AspectRatio(
-              aspectRatio: 1.4,
-              child: Image.network(
-                imgLink ?? 'https://example.com/default_image.png',
-                width: double.infinity,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    width: double.infinity,
-                    color: Colors.grey[200],
-                    alignment: Alignment.center,
-                    child: const Text('Image not available'),
+          GestureDetector(
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext bottomSheetContext) {
+                  return BlocProvider<ProductSelectionCubit>.value(
+                    value: BlocProvider.of<ProductSelectionCubit>(context),
+                    child: AddToCartModal(
+                      productId: productId,
+                      imgLink: imgLink,
+                      nameProduct: nameProduct,
+                      sizes: sizes,
+                    ),
                   );
                 },
-              ),
+              );
+            },
+            child: Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                  child: AspectRatio(
+                    aspectRatio: 1.4,
+                    child: Image.network(
+                      imgLink ?? 'https://example.com/default_image.png',
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          width: double.infinity,
+                          color: Colors.grey[200],
+                          alignment: Alignment.center,
+                          child: const Text('Image not available'),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                if (isSelected > 0)
+                  Positioned(
+                    top: 8,
+                    right: 8,
+                    child: Container(
+                      width: 20,
+                      height: 20,
+                      decoration: const BoxDecoration(
+                        color: Colors.blue,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.check,
+                        color: Colors.white,
+                        size: 18,
+                      ),
+                    ),
+                  ),
+              ],
             ),
           ),
           const SizedBox(height: 8),
@@ -61,7 +109,7 @@ class CardProduct extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "\$$price",
+                      "\$${price ?? 'error'}",
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: Colors.black,
                           ),
@@ -70,16 +118,7 @@ class CardProduct extends StatelessWidget {
                       color: Colors.grey[500],
                       icon: const Icon(Icons.shopping_cart_checkout),
                       onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AddToCartModal(
-                              imgLink: imgLink,
-                              nameProduct: nameProduct,
-                              sizes: sizes,
-                            );
-                          },
-                        );
+                        context.read<ProductSelectionCubit>().handleSelectionProduct(productId);
                       },
                     ),
                   ],

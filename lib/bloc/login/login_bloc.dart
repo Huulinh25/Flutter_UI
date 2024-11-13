@@ -9,7 +9,7 @@ class LoginBloc extends Cubit<LoginState> {
     switch (event) {
       case LoginEvent.login:
         emit(LoginState.loading());
-        Future.delayed(const Duration(seconds: 2), () {
+        Future.delayed(const Duration(seconds: 0), () {
           emit(LoginState.success());
         });
     }
