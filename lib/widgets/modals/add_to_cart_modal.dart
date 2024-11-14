@@ -10,11 +10,14 @@ import '../../model/product_model.dart';
 class AddToCartModal extends StatelessWidget {
   final ProductModel product;
   final List<String> sizes;
+  final List<Color> colors;
+
 
   const AddToCartModal({
     super.key,
     required this.product,
     required this.sizes,
+    required this.colors,
   });
 
   @override
@@ -92,19 +95,12 @@ class AddToCartModal extends StatelessWidget {
             const SizedBox(height: 10),
             Wrap(
               spacing: 8,
-              children: [
-                Colors.cyan,
-                Colors.green,
-                Colors.pink,
-                Colors.black,
-                Colors.purple
-              ]
-                  .map((color) => Container(
-                        width: 28,
-                        height: 28,
-                        color: color,
-                      ))
-                  .toList(),
+              children: colors.map((color) => Container(
+                width: 28,
+                height: 28,
+                color: color,
+              ))
+              .toList(),
             ),
             const SizedBox(height: 16),
             Text("Add note", style: Theme.of(context).textTheme.labelSmall),

@@ -12,8 +12,9 @@ class CardProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> sizes = ['S', 'M', 'L', 'XL', 'XXXL'];
+    final List<Color> colors = [Colors.cyan, Colors.green, Colors.pink, Colors.black, Colors.purple];
     final selectedProducts = context.watch<ProductSelectionCubit>().state;
-    final isSelected = selectedProducts[product.id] ?? 0;
+    final isSelected = selectedProducts[product.id] ?? -1;
 
     return Container(
       decoration: const BoxDecoration(
@@ -34,6 +35,7 @@ class CardProduct extends StatelessWidget {
                     child: AddToCartModal(
                       product: product,
                       sizes: sizes,
+                      colors: colors,
                     ),
                   );
                 },
@@ -60,7 +62,7 @@ class CardProduct extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (isSelected > 0)
+                if (isSelected >= 0)
                   Positioned(
                     top: 8,
                     right: 8,
@@ -99,9 +101,7 @@ class CardProduct extends StatelessWidget {
                   children: [
                     Text(
                       "\$${product.price?.toString() ?? 'error'}",
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.black,
-                          ),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.black),
                     ),
                     IconButton(
                       color: Colors.grey[500],
