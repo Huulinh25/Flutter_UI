@@ -4,19 +4,16 @@ import 'package:my_app/widgets/button/confirm_button.dart';
 import 'package:my_app/widgets/items/quantity_selector_item.dart';
 
 import '../../cubit/product/product_selection_cubit.dart';
+import '../../model/product_model.dart';
 
 
 class AddToCartModal extends StatelessWidget {
-  final int productId;
-  final String? imgLink;
-  final String nameProduct;
+  final ProductModel product;
   final List<String> sizes;
 
   const AddToCartModal({
     super.key,
-    required this.productId,
-    required this.imgLink,
-    required this.nameProduct,
+    required this.product,
     required this.sizes,
   });
 
@@ -34,7 +31,7 @@ class AddToCartModal extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.network(
-                  imgLink ?? 'https://example.com/default_image.png',
+                  product.image ?? 'https://example.com/default_image.png',
                   width: 80,
                   height: 80,
                   fit: BoxFit.cover,
@@ -45,7 +42,7 @@ class AddToCartModal extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        nameProduct,
+                        product.title ?? 'No name',
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: const TextStyle(
@@ -128,8 +125,7 @@ class AddToCartModal extends StatelessWidget {
               child: ConfirmButton(
                 nameButton: 'Add to cart',
                 onPressed: () {
-                  // print('eeeeeeeeeeeeeeee $productId');
-                  context.read<ProductSelectionCubit>().handleSelectionProduct(productId);
+                  context.read<ProductSelectionCubit>().handleSelectionProduct(product.id!);
                   Navigator.pop(context); //close bottom modal
                 },
               ),

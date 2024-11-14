@@ -1,28 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_app/model/product_model.dart';
 import 'package:my_app/widgets/modals/add_to_cart_modal.dart';
-
 import '../../cubit/product/product_selection_cubit.dart';
 
 class CardProduct extends StatelessWidget {
-  const CardProduct({
-    super.key,
-    required this.productId,
-    this.imgLink,
-    required this.nameProduct,
-    this.price,
-  });
+  final ProductModel product;
 
-  final int productId;
-  final String? imgLink;
-  final String nameProduct;
-  final String? price;
+  const CardProduct({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
     final List<String> sizes = ['S', 'M', 'L', 'XL', 'XXXL'];
     final selectedProducts = context.watch<ProductSelectionCubit>().state;
-    final isSelected = selectedProducts[productId] ?? 0;
+    final isSelected = selectedProducts[product.id] ?? 0;
 
     return Container(
       decoration: const BoxDecoration(
@@ -41,9 +32,7 @@ class CardProduct extends StatelessWidget {
                   return BlocProvider<ProductSelectionCubit>.value(
                     value: BlocProvider.of<ProductSelectionCubit>(context),
                     child: AddToCartModal(
-                      productId: productId,
-                      imgLink: imgLink,
-                      nameProduct: nameProduct,
+                      product: product,
                       sizes: sizes,
                     ),
                   );
@@ -57,7 +46,7 @@ class CardProduct extends StatelessWidget {
                   child: AspectRatio(
                     aspectRatio: 1.4,
                     child: Image.network(
-                      imgLink ?? 'https://example.com/default_image.png',
+                      product.image ?? 'https://example.com/default_image.png',
                       width: double.infinity,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
@@ -99,7 +88,7 @@ class CardProduct extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  nameProduct,
+                  product.title ?? 'No Title',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.labelSmall,
@@ -109,7 +98,7 @@ class CardProduct extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "\$${price ?? 'error'}",
+                      "\$${product.price?.toString() ?? 'error'}",
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: Colors.black,
                           ),
@@ -118,7 +107,7 @@ class CardProduct extends StatelessWidget {
                       color: Colors.grey[500],
                       icon: const Icon(Icons.shopping_cart_checkout),
                       onPressed: () {
-                        context.read<ProductSelectionCubit>().handleSelectionProduct(productId);
+                        context.read<ProductSelectionCubit>().handleSelectionProduct(product.id!);
                       },
                     ),
                   ],

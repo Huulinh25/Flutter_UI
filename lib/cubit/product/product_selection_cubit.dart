@@ -14,7 +14,6 @@ class ProductSelectionCubit extends Cubit<Map<int, int>> {
     }
 
     emit(newSelection);
-    print('aaaaaaaaa $newSelection');
   }
 
   void handleDecreaseProduct(int productId) {
@@ -29,6 +28,5 @@ class ProductSelectionCubit extends Cubit<Map<int, int>> {
     }
 
     emit(newSelection);
-    // print('bbbbbbbbbb $newSelection');
   }
 }

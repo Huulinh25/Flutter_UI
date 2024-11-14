@@ -23,12 +23,7 @@ class ProductGrid extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
           final product = products[index];
-          return CardProduct(
-            productId: product.id!,
-            imgLink: product.image ?? '',
-            nameProduct: product.title ?? 'No Title',
-            price: product.price?.toString() ?? '0',
-          );
+          return CardProduct(product: product);
         },
       ),
     );
