@@ -26,21 +26,21 @@ class CardProduct extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           GestureDetector(
-            onTap: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (BuildContext bottomSheetContext) {
-                  return BlocProvider<ProductSelectionCubit>.value(
-                    value: BlocProvider.of<ProductSelectionCubit>(context),
-                    child: AddToCartModal(
-                      product: product,
-                      sizes: sizes,
-                      colors: colors,
-                    ),
-                  );
-                },
-              );
-            },
+            // onTap: () {
+            //   showModalBottomSheet(
+            //     context: context,
+            //     builder: (BuildContext bottomSheetContext) {
+            //       return BlocProvider<ProductSelectionCubit>.value(
+            //         value: BlocProvider.of<ProductSelectionCubit>(context),
+            //         child: AddToCartModal(
+            //           product: product,
+            //           sizes: sizes,
+            //           colors: colors,
+            //         ),
+            //       );
+            //     },
+            //   );
+            // },
             child: Stack(
               children: [
                 ClipRRect(
@@ -107,7 +107,19 @@ class CardProduct extends StatelessWidget {
                       color: Colors.grey[500],
                       icon: const Icon(Icons.shopping_cart_checkout),
                       onPressed: () {
-                        context.read<ProductSelectionCubit>().handleSelectionProduct(product.id!);
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext bottomSheetContext) {
+                            return BlocProvider<ProductSelectionCubit>.value(
+                              value: BlocProvider.of<ProductSelectionCubit>(context),
+                              child: AddToCartModal(
+                                product: product,
+                                sizes: sizes,
+                                colors: colors,
+                              ),
+                            );
+                          },
+                        );
                       },
                     ),
                   ],
