@@ -4,9 +4,10 @@ import 'package:my_app/bloc/login/login_bloc.dart';
 import 'package:my_app/bloc/login/login_event.dart';
 import 'package:my_app/bloc/login/login_state.dart';
 import 'package:my_app/widgets/input/base_input.dart';
+
 import '../widgets/app_bar/welcome_app_bar.dart';
 import '../widgets/button/primary_button.dart';
-import 'home_screen.dart';
+import 'home/home_screen.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

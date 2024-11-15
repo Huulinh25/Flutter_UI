@@ -4,14 +4,12 @@ import 'package:my_app/widgets/button/confirm_button.dart';
 import 'package:my_app/widgets/items/quantity_selector_item.dart';
 
 import '../../cubit/product/product_selection_cubit.dart';
-import '../../model/product_model.dart';
-
+import '../../model/product.dart';
 
 class AddToCartModal extends StatelessWidget {
-  final ProductModel product;
+  final Product product;
   final List<String> sizes;
   final List<Color> colors;
-
 
   const AddToCartModal({
     super.key,
@@ -95,12 +93,13 @@ class AddToCartModal extends StatelessWidget {
             const SizedBox(height: 10),
             Wrap(
               spacing: 8,
-              children: colors.map((color) => Container(
-                width: 28,
-                height: 28,
-                color: color,
-              ))
-              .toList(),
+              children: colors
+                  .map((color) => Container(
+                        width: 28,
+                        height: 28,
+                        color: color,
+                      ))
+                  .toList(),
             ),
             const SizedBox(height: 16),
             Text("Add note", style: Theme.of(context).textTheme.labelSmall),

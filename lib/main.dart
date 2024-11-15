@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:injectable/injectable.dart';
+
+import 'main.config.dart';
 import 'screens/welcome_screen.dart';
 
+final getIt = GetIt.instance;
+
+@InjectableInit(
+  initializerName: 'init', // default
+  preferRelativeImports: true, // default
+  asExtension: true, // default
+)
+void configureDependencies() => getIt.init();
+
 void main() {
+  configureDependencies();
   runApp(const MyApp());
 }
 
@@ -37,8 +51,7 @@ class MyApp extends StatelessWidget {
             minimumSize: const Size(300, 50),
             backgroundColor: Colors.teal[700],
             foregroundColor: Colors.white,
-            textStyle:
-                const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(50),
             ),
@@ -60,16 +73,9 @@ class MyApp extends StatelessWidget {
               color: Colors.teal[700],
               fontWeight: FontWeight.bold,
             ),
-            bodyMedium: const TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              fontWeight: FontWeight.bold
-            ),
-            bodySmall: const TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold
-            )
-          ),
+            bodyMedium:
+                const TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
+            bodySmall: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
       ),
       home: const WelcomePage(),
     );

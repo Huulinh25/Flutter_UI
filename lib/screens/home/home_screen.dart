@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_app/main.dart';
 import 'package:my_app/widgets/app_bar/header_app_bar.dart';
 import 'package:my_app/widgets/home/product_grid.dart';
 import 'package:my_app/widgets/items/search_bar_filter_item.dart';
-import '../cubit/product/product_cubit.dart';
-import '../cubit/product/product_selection_cubit.dart';
-import '../cubit/product/product_state.dart';
-import '../widgets/modals/selected_products_modal.dart';
+
+import '../../cubit/product/product_selection_cubit.dart';
+import '../../widgets/modals/selected_products_modal.dart';
+import 'bloc/product_cubit.dart';
+import 'bloc/product_state.dart';
 
 class HomeScreen extends StatelessWidget {
   final String? loginMessage;
@@ -19,21 +21,21 @@ class HomeScreen extends StatelessWidget {
       appBar: const HeaderAppBar(),
       body: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => ProductCubit()..fetchProducts()),
+          BlocProvider(create: (context) => getIt<ProductCubit>()..fetchProducts()),
           BlocProvider(create: (context) => ProductSelectionCubit()),
         ],
         child: BlocConsumer<ProductCubit, ProductState>(
           listener: (context, state) {
-            if (state is ProductError) {
+            if (state.message?.isNotEmpty ?? false) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Error: ${state.message}')),
               );
             }
           },
           builder: (context, state) {
-            if (state is ProductLoading) {
+            if (state.loading) {
               return const Center(child: CircularProgressIndicator());
-            } else if (state is ProductLoaded) {
+            } else if (state.products != null) {
               return Stack(
                 children: [
                   SingleChildScrollView(
@@ -52,7 +54,8 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                         const SearchBarFilterItem(),
-                        ProductGrid(products: state.products),
+                        const SizedBox(height: 10),
+                        ProductGrid(products: state.products ?? []),
                       ],
                     ),
                   ),

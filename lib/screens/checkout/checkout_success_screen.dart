@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/screens/home_screen.dart';
+import 'package:my_app/screens/home/home_screen.dart';
 import 'package:my_app/widgets/app_bar/header_app_bar.dart';
 import 'package:my_app/widgets/button/confirm_button.dart';
 
@@ -23,7 +23,7 @@ class CheckouSuccesstScreen extends StatelessWidget {
               height: 100,
               fit: BoxFit.contain,
             ),
-            
+
             const SizedBox(height: 20),
             const Text(
               'Successful',
@@ -39,7 +39,7 @@ class CheckouSuccesstScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
-            
+
             const SizedBox(height: 10),
             ConfirmButton(
               nameButton: 'Back',
@@ -52,7 +52,7 @@ class CheckouSuccesstScreen extends StatelessWidget {
                 );
               },
             ),
-            
+
             const SizedBox(height: 10),
             ConfirmButton(
               backgroundColor: Colors.white,
@@ -60,7 +60,6 @@ class CheckouSuccesstScreen extends StatelessWidget {
               nameButton: 'Print receipt',
               onPressed: () {},
             ),
-
           ],
         ),
       ),
